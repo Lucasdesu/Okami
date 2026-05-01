@@ -1,4 +1,4 @@
-﻿# Okami Web Chat (Vercel + n8n)
+# Okami Web Chat (Vercel + n8n)
 
 MVP de chat web embutível para site, com envio de mensagens para webhook do n8n.
 
