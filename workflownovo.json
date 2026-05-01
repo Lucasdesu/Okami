@@ -1,0 +1,453 @@
+﻿{
+    "name":  "My workflow",
+    "nodes":  [
+                  {
+                      "parameters":  {
+                                         "rules":  {
+                                                       "values":  [
+                                                                      {
+                                                                          "conditions":  {
+                                                                                             "options":  {
+                                                                                                             "caseSensitive":  true,
+                                                                                                             "leftValue":  "",
+                                                                                                             "typeValidation":  "strict",
+                                                                                                             "version":  3
+                                                                                                         },
+                                                                                             "conditions":  [
+                                                                                                                {
+                                                                                                                    "leftValue":  "={{ [\"entrega\", \"frete\", \"envio\", \"receber\", \"prazo\", \"sp\", \"sao paulo\"].some(p =\u003e $json.mensagem_normalizada.includes(p)) }}",
+                                                                                                                    "rightValue":  "entrega",
+                                                                                                                    "operator":  {
+                                                                                                                                     "type":  "boolean",
+                                                                                                                                     "operation":  "true",
+                                                                                                                                     "singleValue":  true
+                                                                                                                                 },
+                                                                                                                    "id":  "f752f642-272e-4231-ae12-84efc971529e"
+                                                                                                                }
+                                                                                                            ],
+                                                                                             "combinator":  "and"
+                                                                                         }
+                                                                      },
+                                                                      {
+                                                                          "conditions":  {
+                                                                                             "options":  {
+                                                                                                             "caseSensitive":  true,
+                                                                                                             "leftValue":  "",
+                                                                                                             "typeValidation":  "strict",
+                                                                                                             "version":  3
+                                                                                                         },
+                                                                                             "conditions":  [
+                                                                                                                {
+                                                                                                                    "id":  "42fba395-f265-4473-be8c-71d620b88737",
+                                                                                                                    "leftValue":  "={{ [\"erro\", \"falhou\", \"problema\", \"cobrou\", \"nao consegui pagar\", \"pagamento nao\"].some(p =\u003e $json.mensagem_normalizada.includes(p)) }}",
+                                                                                                                    "rightValue":  "pagamento",
+                                                                                                                    "operator":  {
+                                                                                                                                     "type":  "boolean",
+                                                                                                                                     "operation":  "true",
+                                                                                                                                     "singleValue":  true
+                                                                                                                                 }
+                                                                                                                }
+                                                                                                            ],
+                                                                                             "combinator":  "and"
+                                                                                         }
+                                                                      },
+                                                                      {
+                                                                          "conditions":  {
+                                                                                             "options":  {
+                                                                                                             "caseSensitive":  true,
+                                                                                                             "leftValue":  "",
+                                                                                                             "typeValidation":  "strict",
+                                                                                                             "version":  3
+                                                                                                         },
+                                                                                             "conditions":  [
+                                                                                                                {
+                                                                                                                    "id":  "794b7cb7-7d3d-4b42-a972-d8520ce5f6c5",
+                                                                                                                    "leftValue":  "={{ [\"pagamento\", \"pagar\", \"pix\", \"cartao\", \"boleto\", \"parcelamento\", \"parcela\"].some(p =\u003e $json.mensagem_normalizada.includes(p)) }}",
+                                                                                                                    "rightValue":  "pagamento",
+                                                                                                                    "operator":  {
+                                                                                                                                     "type":  "boolean",
+                                                                                                                                     "operation":  "true",
+                                                                                                                                     "singleValue":  true
+                                                                                                                                 }
+                                                                                                                }
+                                                                                                            ],
+                                                                                             "combinator":  "and"
+                                                                                         }
+                                                                      },
+                                                                      {
+                                                                          "conditions":  {
+                                                                                             "options":  {
+                                                                                                             "caseSensitive":  true,
+                                                                                                             "leftValue":  "",
+                                                                                                             "typeValidation":  "strict",
+                                                                                                             "version":  3
+                                                                                                         },
+                                                                                             "conditions":  [
+                                                                                                                {
+                                                                                                                    "id":  "fb1fe3e2-c0ed-4cd0-aa63-187957c47a6c",
+                                                                                                                    "leftValue":  "={{ [\"comprar\", \"compra\", \"quero comprar\", \"link\", \"site\", \"pedido\"].some(p =\u003e $json.mensagem_normalizada.includes(p)) }}",
+                                                                                                                    "rightValue":  "",
+                                                                                                                    "operator":  {
+                                                                                                                                     "type":  "boolean",
+                                                                                                                                     "operation":  "true",
+                                                                                                                                     "singleValue":  true
+                                                                                                                                 }
+                                                                                                                }
+                                                                                                            ],
+                                                                                             "combinator":  "and"
+                                                                                         }
+                                                                      },
+                                                                      {
+                                                                          "conditions":  {
+                                                                                             "options":  {
+                                                                                                             "caseSensitive":  true,
+                                                                                                             "leftValue":  "",
+                                                                                                             "typeValidation":  "strict",
+                                                                                                             "version":  3
+                                                                                                         },
+                                                                                             "conditions":  [
+                                                                                                                {
+                                                                                                                    "id":  "29ac5668-12a3-42b0-90b6-8999751bf692",
+                                                                                                                    "leftValue":  "={{ [\"whey\", \"creatina\", \"vitamina\", \"suplemento\", \"pre-treino\", \"hipercalorico\"].some(p =\u003e $json.mensagem_normalizada.includes(p)) }}",
+                                                                                                                    "rightValue":  "",
+                                                                                                                    "operator":  {
+                                                                                                                                     "type":  "boolean",
+                                                                                                                                     "operation":  "true",
+                                                                                                                                     "singleValue":  true
+                                                                                                                                 }
+                                                                                                                }
+                                                                                                            ],
+                                                                                             "combinator":  "and"
+                                                                                         }
+                                                                      },
+                                                                      {
+                                                                          "conditions":  {
+                                                                                             "options":  {
+                                                                                                             "caseSensitive":  true,
+                                                                                                             "leftValue":  "",
+                                                                                                             "typeValidation":  "strict",
+                                                                                                             "version":  3
+                                                                                                         },
+                                                                                             "conditions":  [
+                                                                                                                {
+                                                                                                                    "id":  "8c4a1d9a-9fca-471d-9f38-424da0870a74",
+                                                                                                                    "leftValue":  "={{ [\"personal\", \"nutricionista\", \"nutri\", \"acompanhamento\", \"consultoria\"].some(p =\u003e $json.mensagem_normalizada.includes(p)) }}",
+                                                                                                                    "rightValue":  "",
+                                                                                                                    "operator":  {
+                                                                                                                                     "type":  "boolean",
+                                                                                                                                     "operation":  "true",
+                                                                                                                                     "singleValue":  true
+                                                                                                                                 }
+                                                                                                                }
+                                                                                                            ],
+                                                                                             "combinator":  "and"
+                                                                                         }
+                                                                      },
+                                                                      {
+                                                                          "conditions":  {
+                                                                                             "options":  {
+                                                                                                             "caseSensitive":  true,
+                                                                                                             "leftValue":  "",
+                                                                                                             "typeValidation":  "strict",
+                                                                                                             "version":  3
+                                                                                                         },
+                                                                                             "conditions":  [
+                                                                                                                {
+                                                                                                                    "id":  "46fffb27-3f85-4638-a959-453a1760edc1",
+                                                                                                                    "leftValue":  "",
+                                                                                                                    "rightValue":  "",
+                                                                                                                    "operator":  {
+                                                                                                                                     "type":  "string",
+                                                                                                                                     "operation":  "equals",
+                                                                                                                                     "name":  "filter.operator.equals"
+                                                                                                                                 }
+                                                                                                                }
+                                                                                                            ],
+                                                                                             "combinator":  "and"
+                                                                                         }
+                                                                      }
+                                                                  ]
+                                                   },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.switch",
+                      "typeVersion":  3.4,
+                      "position":  [
+                                       -96,
+                                       176
+                                   ],
+                      "id":  "6b992b5d-42cd-46ad-93d3-20c85f3e7874",
+                      "name":  "Switch"
+                  },
+                  {
+                      "parameters":  {
+                                         "httpMethod":  "POST",
+                                         "path":  "atendimento",
+                                         "responseMode":  "responseNode",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.webhook",
+                      "typeVersion":  2.1,
+                      "position":  [
+                                       -480,
+                                       256
+                                   ],
+                      "id":  "3d0511bc-0336-4f05-885c-30ac5647bd10",
+                      "name":  "Webhook1",
+                      "webhookId":  "22d6d0f2-87a5-420d-8d75-afb6a9ee2454"
+                  },
+                  {
+                      "parameters":  {
+                                         "assignments":  {
+                                                             "assignments":  [
+                                                                                 {
+                                                                                     "id":  "721bc844-a553-404d-b8b7-6425cd2e3f1e",
+                                                                                     "name":  "mensagem_normalizada",
+                                                                                     "value":  "={{ ($json.body.message || \"\").toLowerCase().normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\") }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "032165b1-83d7-482b-bcba-f51e61e64eb3",
+                                                                                     "name":  "canal",
+                                                                                     "value":  "={{ $json.body.source || \"web\" }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "dcedf5a7-ad37-48c5-8b9b-5b602b0e9fa0",
+                                                                                     "name":  "eh_site",
+                                                                                     "value":  "={{ ($json.body.source || \"web\") === \"web\" }}",
+                                                                                     "type":  "boolean"
+                                                                                 }
+                                                                             ]
+                                                         },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  3.4,
+                      "position":  [
+                                       -272,
+                                       256
+                                   ],
+                      "id":  "26cb6c39-3ebd-4f58-bae3-5a9c6ced00c1",
+                      "name":  "normalizador e filtro inicial"
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "json",
+                                         "responseBody":  "{\n  \"reply\": \"Para falar sobre acompanhamento com personal ou nutricionista, vou te direcionar para o WhatsApp: https://wa.me/55NUMERO\"\n}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       272,
+                                       608
+                                   ],
+                      "id":  "72f3af6a-4360-43e8-854a-68958f951f33",
+                      "name":  "Personal/nutri"
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "json",
+                                         "responseBody":  "{\n  \"reply\": \"Realizamos entregas para toda SÃ£o Paulo. Para consultar valores, prazos e finalizar a compra, vocÃª pode acessar nosso site.\"\n}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       272,
+                                       -32
+                                   ],
+                      "id":  "a89b5195-0984-4a93-8c5e-2118d4a34c84",
+                      "name":  "Entrega"
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "json",
+                                         "responseBody":  "{\n  \"reply\": \"Posso te ajudar com entrega, pagamento, compra pelo site, produtos disponÃ­veis ou atendimento humano. Sobre o que vocÃª gostaria de falar?\"\n}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       272,
+                                       736
+                                   ],
+                      "id":  "7c50f466-5bbe-4843-8ce0-c2eab4fb155f",
+                      "name":  "Default"
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "json",
+                                         "responseBody":  "{\n  \"reply\": \"Temos opÃ§Ãµes de whey, creatina, vitaminas e outros suplementos no site. Para ver disponibilidade, valores e marcas, o ideal Ã© consultar diretamente pelo catÃ¡logo: https://metasuplementosoficial.lojavirtualnuvem.com.br\"\n}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       272,
+                                       480
+                                   ],
+                      "id":  "de55693d-ca12-4118-b2f4-9559cac6c8b1",
+                      "name":  "Produtos"
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "json",
+                                         "responseBody":  "{\n  \"reply\": \"A compra Ã© feita diretamente pelo nosso site. VocÃª pode escolher os produtos, conferir as informaÃ§Ãµes e finalizar o pagamento por lÃ¡: https://metasuplementosoficial.lojavirtualnuvem.com.br\"\n}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       272,
+                                       352
+                                   ],
+                      "id":  "83dcca0b-6c7d-439a-b465-b7ae56f02a5b",
+                      "name":  "Compra"
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "json",
+                                         "responseBody":  "{\n  \"reply\": \"Aceitamos pagamentos por cartao, Pix e Boleto, entretando nÃ£o parcelamos o valor. A realizaÃ§Ã£o do pedido e pagamento Ã© feita diretamente pelo site.\"\n}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       272,
+                                       224
+                                   ],
+                      "id":  "27e8b31c-f1ff-4707-a15c-644f5dd25914",
+                      "name":  "Pagamentos"
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "json",
+                                         "responseBody":  "{\n  \"reply\": \"Nesse caso, vou te direcionar para um atendente pelo WhatsApp para verificarem melhor: https://wa.me/55NUMERO\"\n}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       272,
+                                       96
+                                   ],
+                      "id":  "cb9fdf3f-b301-4733-b280-3fd5ab5ca1fb",
+                      "name":  "Fallback erro pagamento"
+                  }
+              ],
+    "pinData":  {
+
+                },
+    "connections":  {
+                        "Switch":  {
+                                       "main":  [
+                                                    [
+                                                        {
+                                                            "node":  "Entrega",
+                                                            "type":  "main",
+                                                            "index":  0
+                                                        }
+                                                    ],
+                                                    [
+                                                        {
+                                                            "node":  "Fallback erro pagamento",
+                                                            "type":  "main",
+                                                            "index":  0
+                                                        }
+                                                    ],
+                                                    [
+                                                        {
+                                                            "node":  "Pagamentos",
+                                                            "type":  "main",
+                                                            "index":  0
+                                                        }
+                                                    ],
+                                                    [
+                                                        {
+                                                            "node":  "Compra",
+                                                            "type":  "main",
+                                                            "index":  0
+                                                        }
+                                                    ],
+                                                    [
+                                                        {
+                                                            "node":  "Produtos",
+                                                            "type":  "main",
+                                                            "index":  0
+                                                        }
+                                                    ],
+                                                    [
+                                                        {
+                                                            "node":  "Personal/nutri",
+                                                            "type":  "main",
+                                                            "index":  0
+                                                        }
+                                                    ],
+                                                    [
+                                                        {
+                                                            "node":  "Default",
+                                                            "type":  "main",
+                                                            "index":  0
+                                                        }
+                                                    ]
+                                                ]
+                                   },
+                        "Webhook1":  {
+                                         "main":  [
+                                                      [
+                                                          {
+                                                              "node":  "normalizador e filtro inicial",
+                                                              "type":  "main",
+                                                              "index":  0
+                                                          }
+                                                      ]
+                                                  ]
+                                     },
+                        "normalizador e filtro inicial":  {
+                                                              "main":  [
+                                                                           [
+                                                                               {
+                                                                                   "node":  "Switch",
+                                                                                   "type":  "main",
+                                                                                   "index":  0
+                                                                               }
+                                                                           ]
+                                                                       ]
+                                                          }
+                    },
+    "active":  false,
+    "settings":  {
+                     "executionOrder":  "v1",
+                     "binaryMode":  "separate"
+                 },
+    "versionId":  "780e8dff-43f0-4dad-95d9-8cb7f53e3f08",
+    "meta":  {
+                 "instanceId":  "47deffbfbf9991f3445275ee59ea250d34a55f358dff5ea5873fc9a16284c084"
+             },
+    "id":  "HueQJAh5uUYrW3PS",
+    "tags":  [
+
+             ]
+}
