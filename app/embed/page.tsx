@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
 import "./embed.css";
 
 type Message = {
@@ -25,6 +25,12 @@ export default function EmbedPage() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const sessionId = useMemo(() => getSessionId(), []);
+  const messagesRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!messagesRef.current) return;
+    messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+  }, [messages, loading]);
 
   async function onSend(e: FormEvent) {
     e.preventDefault();
@@ -53,10 +59,17 @@ export default function EmbedPage() {
     }
   }
 
+  function onInputKeyDown(e: KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      void onSend(e as unknown as FormEvent);
+    }
+  }
+
   return (
     <main className="chat-root">
       <header className="chat-header">Atendimento</header>
-      <section className="chat-messages">
+      <section className="chat-messages" ref={messagesRef}>
         {messages.map((msg, idx) => (
           <div key={idx} className={`bubble ${msg.from}`}>
             {msg.text}
@@ -65,10 +78,12 @@ export default function EmbedPage() {
         {loading ? <div className="bubble bot">Digitando...</div> : null}
       </section>
       <form className="chat-input" onSubmit={onSend}>
-        <input
+        <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onKeyDown={onInputKeyDown}
           placeholder="Digite sua mensagem"
+          rows={1}
         />
         <button type="submit" disabled={loading}>Enviar</button>
       </form>

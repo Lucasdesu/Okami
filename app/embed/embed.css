@@ -1,12 +1,23 @@
-﻿.chat-root {
+﻿:root {
+  --brand-primary: #6039cf;
+  --brand-deep: #142e8e;
+  --brand-cyan: #05e3d1;
+  --brand-blue: #115994;
+  --surface: #ffffff;
+  --surface-soft: #f8f9fc;
+  --line: #d6dcf4;
+  --text-main: #112049;
+}
+
+.chat-root {
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  background: #ffffff;
+  background: var(--surface);
 }
 
 .chat-header {
-  background: #111827;
+  background: linear-gradient(120deg, var(--brand-primary), var(--brand-deep));
   color: #fff;
   padding: 12px 14px;
   font-size: 14px;
@@ -19,49 +30,66 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background: #f3f4f6;
+  background: radial-gradient(circle at top right, #e9fbff 0%, var(--surface-soft) 38%, var(--surface) 100%);
 }
 
 .bubble {
   max-width: 85%;
-  padding: 8px 10px;
-  border-radius: 10px;
+  padding: 9px 11px;
+  border-radius: 12px;
   font-size: 14px;
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
 .bubble.user {
   margin-left: auto;
-  background: #111827;
+  background: linear-gradient(135deg, var(--brand-blue), var(--brand-deep));
   color: #fff;
 }
 
 .bubble.bot {
   margin-right: auto;
   background: #fff;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--line);
+  color: var(--text-main);
 }
 
 .chat-input {
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--line);
   padding: 10px;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 8px;
+  background: #fff;
 }
 
-.chat-input input {
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 10px;
+.chat-input textarea {
+  border: 1px solid #c9d3f0;
+  border-radius: 10px;
+  padding: 10px 12px;
   font-size: 14px;
+  font-family: Arial, sans-serif;
+  min-height: 42px;
+  max-height: 100px;
+  resize: vertical;
+  color: var(--text-main);
+}
+
+.chat-input textarea:focus {
+  outline: 2px solid #88f3ea;
+  border-color: var(--brand-cyan);
 }
 
 .chat-input button {
   border: none;
-  background: #111827;
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-deep));
   color: #fff;
-  border-radius: 8px;
-  padding: 0 14px;
+  border-radius: 10px;
+  padding: 0 16px;
   font-weight: 700;
+  min-height: 42px;
+}
+
+.chat-input button:disabled {
+  opacity: 0.7;
 }
