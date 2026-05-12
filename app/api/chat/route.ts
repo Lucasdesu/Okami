@@ -1,4 +1,5 @@
 ﻿import { NextResponse } from "next/server";
+import { addMessage } from "@/lib/chatRepository";
 
 type ChatRequest = {
   sessionId: string;
@@ -43,6 +44,7 @@ export async function POST(req: Request) {
   const body = (await req.json()) as ChatRequest;
   const message = body?.message?.trim() ?? "";
   const sessionId = body?.sessionId?.trim() ?? "";
+  const source = body.source ?? "web";
 
   if (!sessionId || !message) {
     return NextResponse.json({ error: "sessionId e message sao obrigatorios" }, { status: 400 });
@@ -69,19 +71,23 @@ export async function POST(req: Request) {
   }
 
   try {
+    await addMessage(sessionId, source, "user", message);
+
     const upstream = await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         session_id: sessionId,
         message,
-        source: body.source ?? "web",
+        source,
         timestamp: new Date().toISOString()
       })
     });
 
     const data = await upstream.json().catch(() => ({}));
     const reply = typeof data?.reply === "string" ? data.reply : "Recebi sua mensagem. Um momento.";
+
+    await addMessage(sessionId, source, "bot", reply);
 
     return NextResponse.json({ reply });
   } catch {

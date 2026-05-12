@@ -1,4 +1,4 @@
-{
+﻿{
     "name":  "My workflow",
     "nodes":  [
                   {
@@ -23,6 +23,29 @@
                                                                                                                                      "singleValue":  true
                                                                                                                                  },
                                                                                                                     "id":  "f752f642-272e-4231-ae12-84efc971529e"
+                                                                                                                }
+                                                                                                            ],
+                                                                                             "combinator":  "and"
+                                                                                         }
+                                                                      },
+                                                                      {
+                                                                          "conditions":  {
+                                                                                             "options":  {
+                                                                                                             "caseSensitive":  true,
+                                                                                                             "leftValue":  "",
+                                                                                                             "typeValidation":  "strict",
+                                                                                                             "version":  3
+                                                                                                         },
+                                                                                             "conditions":  [
+                                                                                                                {
+                                                                                                                    "id":  "2197b7cd-9988-4a49-bf63-e2e7a687cc11",
+                                                                                                                    "leftValue":  "={{ [\"belem\", \"para\", \"fora de sp\", \"outro estado\", \"norte\", \"nordeste\", \"rio de janeiro\", \"minas gerais\"].some(p =\u003e $json.mensagem_normalizada.includes(p)) }}",
+                                                                                                                    "rightValue":  "fora-sp",
+                                                                                                                    "operator":  {
+                                                                                                                                     "type":  "boolean",
+                                                                                                                                     "operation":  "true",
+                                                                                                                                     "singleValue":  true
+                                                                                                                                 }
                                                                                                                 }
                                                                                                             ],
                                                                                              "combinator":  "and"
@@ -175,10 +198,10 @@
                       "type":  "n8n-nodes-base.switch",
                       "typeVersion":  3.4,
                       "position":  [
-                                       -96,
-                                       176
+                                       592,
+                                       640
                                    ],
-                      "id":  "6b992b5d-42cd-46ad-93d3-20c85f3e7874",
+                      "id":  "ce732734-7bc6-4fca-9461-e6fcc56f5d44",
                       "name":  "Switch"
                   },
                   {
@@ -193,10 +216,10 @@
                       "type":  "n8n-nodes-base.webhook",
                       "typeVersion":  2.1,
                       "position":  [
-                                       -480,
-                                       256
+                                       208,
+                                       720
                                    ],
-                      "id":  "3d0511bc-0336-4f05-885c-30ac5647bd10",
+                      "id":  "bd4f7a7d-ff0c-4acd-bed0-76005d8ca347",
                       "name":  "Webhook1",
                       "webhookId":  "22d6d0f2-87a5-420d-8d75-afb6a9ee2454"
                   },
@@ -207,20 +230,26 @@
                                                                                  {
                                                                                      "id":  "721bc844-a553-404d-b8b7-6425cd2e3f1e",
                                                                                      "name":  "mensagem_normalizada",
-                                                                                     "value":  "={{ ($json.body.message || \"\").toLowerCase().normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\") }}",
+                                                                                     "value":  "={{ ($json.body.message || $json.body.mensagem || $json.body.entry?.[0]?.messaging?.[0]?.message?.text || $json.body.entry?.[0]?.changes?.[0]?.value?.messages?.[0]?.text?.body || \"\").toLowerCase().normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\") }}",
                                                                                      "type":  "string"
                                                                                  },
                                                                                  {
                                                                                      "id":  "032165b1-83d7-482b-bcba-f51e61e64eb3",
                                                                                      "name":  "canal",
-                                                                                     "value":  "={{ $json.body.source || \"web\" }}",
+                                                                                     "value":  "={{ $json.body.source || ($json.body.entry ? \"instagram\" : \"web\") }}",
                                                                                      "type":  "string"
                                                                                  },
                                                                                  {
                                                                                      "id":  "dcedf5a7-ad37-48c5-8b9b-5b602b0e9fa0",
                                                                                      "name":  "eh_site",
-                                                                                     "value":  "={{ ($json.body.source || \"web\") === \"web\" }}",
+                                                                                     "value":  "={{ ($json.body.source || ($json.body.entry ? \"instagram\" : \"web\")) === \"web\" }}",
                                                                                      "type":  "boolean"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "94c3f0e4-13a7-4cdf-9b1d-aad728bbc001",
+                                                                                     "name":  "session_id",
+                                                                                     "value":  "={{ $json.body.session_id || $json.body.entry?.[0]?.messaging?.[0]?.sender?.id || $json.body.entry?.[0]?.changes?.[0]?.value?.contacts?.[0]?.wa_id || \"\" }}",
+                                                                                     "type":  "string"
                                                                                  }
                                                                              ]
                                                          },
@@ -231,10 +260,10 @@
                       "type":  "n8n-nodes-base.set",
                       "typeVersion":  3.4,
                       "position":  [
-                                       -272,
-                                       256
+                                       416,
+                                       720
                                    ],
-                      "id":  "26cb6c39-3ebd-4f58-bae3-5a9c6ced00c1",
+                      "id":  "605b8635-39ed-4939-915c-ad5a155465dc",
                       "name":  "normalizador e filtro inicial"
                   },
                   {
@@ -248,10 +277,10 @@
                       "type":  "n8n-nodes-base.respondToWebhook",
                       "typeVersion":  1.5,
                       "position":  [
-                                       272,
-                                       608
+                                       960,
+                                       1072
                                    ],
-                      "id":  "72f3af6a-4360-43e8-854a-68958f951f33",
+                      "id":  "4b3f9d6e-72e3-42ad-a80c-6ac813480cba",
                       "name":  "Personal/nutri"
                   },
                   {
@@ -265,10 +294,10 @@
                       "type":  "n8n-nodes-base.respondToWebhook",
                       "typeVersion":  1.5,
                       "position":  [
-                                       272,
-                                       -32
+                                       960,
+                                       432
                                    ],
-                      "id":  "a89b5195-0984-4a93-8c5e-2118d4a34c84",
+                      "id":  "2f058724-784e-4a8b-b0ab-efaf6e8a7926",
                       "name":  "Entrega"
                   },
                   {
@@ -282,10 +311,10 @@
                       "type":  "n8n-nodes-base.respondToWebhook",
                       "typeVersion":  1.5,
                       "position":  [
-                                       272,
-                                       736
+                                       960,
+                                       1200
                                    ],
-                      "id":  "7c50f466-5bbe-4843-8ce0-c2eab4fb155f",
+                      "id":  "a0391e83-758a-4fb0-af01-7e6060d919c3",
                       "name":  "Default"
                   },
                   {
@@ -299,10 +328,10 @@
                       "type":  "n8n-nodes-base.respondToWebhook",
                       "typeVersion":  1.5,
                       "position":  [
-                                       272,
-                                       480
+                                       960,
+                                       944
                                    ],
-                      "id":  "de55693d-ca12-4118-b2f4-9559cac6c8b1",
+                      "id":  "c097e966-b690-4ed8-8541-6a3769f36c0b",
                       "name":  "Produtos"
                   },
                   {
@@ -316,10 +345,10 @@
                       "type":  "n8n-nodes-base.respondToWebhook",
                       "typeVersion":  1.5,
                       "position":  [
-                                       272,
-                                       352
+                                       960,
+                                       816
                                    ],
-                      "id":  "83dcca0b-6c7d-439a-b465-b7ae56f02a5b",
+                      "id":  "75cfad69-f5fa-4436-8e73-ac272f85e88e",
                       "name":  "Compra"
                   },
                   {
@@ -333,10 +362,10 @@
                       "type":  "n8n-nodes-base.respondToWebhook",
                       "typeVersion":  1.5,
                       "position":  [
-                                       272,
-                                       224
+                                       960,
+                                       688
                                    ],
-                      "id":  "27e8b31c-f1ff-4707-a15c-644f5dd25914",
+                      "id":  "b032c607-6630-4dde-a26e-182ad14ad07d",
                       "name":  "Pagamentos"
                   },
                   {
@@ -350,11 +379,189 @@
                       "type":  "n8n-nodes-base.respondToWebhook",
                       "typeVersion":  1.5,
                       "position":  [
-                                       272,
-                                       96
+                                       960,
+                                       560
                                    ],
-                      "id":  "cb9fdf3f-b301-4733-b280-3fd5ab5ca1fb",
+                      "id":  "5d5cd7f0-e347-4fcb-bf75-8b1867c47e96",
                       "name":  "Fallback erro pagamento"
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "json",
+                                         "responseBody":  "{\"reply\":\"No momento, realizamos entregas apenas em Sao Paulo. Se quiser, posso te direcionar para um atendente no WhatsApp para verificar alternativas: https://wa.me/55NUMERO\"}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       960,
+                                       304
+                                   ],
+                      "id":  "bc20f5f7-f789-4c0b-bf86-fc0dc9b2cf2a",
+                      "name":  "Fora de SP"
+                  },
+                  {
+                      "parameters":  {
+                                         "httpMethod":  "GET",
+                                         "path":  "instagram-webhook",
+                                         "responseMode":  "responseNode",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.webhook",
+                      "typeVersion":  2.1,
+                      "position":  [
+                                       -352,
+                                       80
+                                   ],
+                      "id":  "c3b89f69-d8be-4ca2-99ad-ce72de9b40a5",
+                      "name":  "IG Webhook GET Verify"
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "text",
+                                         "responseBody":  "={{ $json.query[\"hub.challenge\"] || \"ok\" }}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       -128,
+                                       80
+                                   ],
+                      "id":  "4ac5fced-c1fc-4547-8b0d-cd5414fd1de1",
+                      "name":  "IG Verify Response"
+                  },
+                  {
+                      "parameters":  {
+                                         "httpMethod":  "POST",
+                                         "path":  "instagram-webhook",
+                                         "responseMode":  "responseNode",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.webhook",
+                      "typeVersion":  2.1,
+                      "position":  [
+                                       -352,
+                                       272
+                                   ],
+                      "id":  "9e666afe-92f9-4f9f-bf7b-f963d09f1289",
+                      "name":  "IG Webhook POST"
+                  },
+                  {
+                      "parameters":  {
+                                         "assignments":  {
+                                                             "assignments":  [
+                                                                                 {
+                                                                                     "id":  "ad397647-8389-413b-8736-33a39d012fe8",
+                                                                                     "name":  "canal",
+                                                                                     "value":  "instagram",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "73b9cf65-3de0-478e-bc7d-de83f2c58f7d",
+                                                                                     "name":  "sender_id",
+                                                                                     "value":  "={{ $json.body.entry?.[0]?.messaging?.[0]?.sender?.id || $json.body.entry?.[0]?.changes?.[0]?.value?.messages?.[0]?.from || \"\" }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "f262e630-4877-439f-b07c-2bfc1c342ed8",
+                                                                                     "name":  "recipient_id",
+                                                                                     "value":  "={{ $json.body.entry?.[0]?.messaging?.[0]?.recipient?.id || $json.body.entry?.[0]?.id || \"\" }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "6dd182f8-1e75-4b00-bb31-d578f67032dd",
+                                                                                     "name":  "mensagem_normalizada",
+                                                                                     "value":  "={{ ($json.body.entry?.[0]?.messaging?.[0]?.message?.text || $json.body.entry?.[0]?.changes?.[0]?.value?.messages?.[0]?.text?.body || \"\").toLowerCase().normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\") }}",
+                                                                                     "type":  "string"
+                                                                                 }
+                                                                             ]
+                                                         },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  3.4,
+                      "position":  [
+                                       -128,
+                                       272
+                                   ],
+                      "id":  "eb7f2cd2-e558-4d01-864c-e11123474e77",
+                      "name":  "IG Normalizador"
+                  },
+                  {
+                      "parameters":  {
+                                         "mode":  "runOnceForAllItems",
+                                         "language":  "javaScript",
+                                         "jsCode":  "const t = ($json.mensagem_normalizada || \"\");\nlet reply = \"Posso te ajudar com entrega, pagamento, compra pelo site, produtos e atendimento humano. Sobre qual tema voce quer falar?\";\n\nif ([\"belem\", \"para\", \"fora de sp\", \"outro estado\", \"norte\", \"nordeste\", \"rio de janeiro\", \"minas gerais\"].some(p =\u003e t.includes(p))) {\n  reply = \"No momento, realizamos entregas apenas em Sao Paulo. Se quiser, posso te direcionar para um atendente no WhatsApp: https://wa.me/55NUMERO\";\n} else if ([\"entrega\", \"frete\", \"envio\", \"receber\", \"prazo\", \"sp\", \"sao paulo\"].some(p =\u003e t.includes(p))) {\n  reply = \"Realizamos entregas para toda Sao Paulo. Para consultar valores, prazos e finalizar a compra, voce pode acessar nosso site.\";\n} else if ([\"erro\", \"falhou\", \"problema\", \"cobrou\", \"nao consegui pagar\", \"pagamento nao\"].some(p =\u003e t.includes(p))) {\n  reply = \"Nesse caso, vou te direcionar para um atendente pelo WhatsApp para verificarem melhor: https://wa.me/55NUMERO\";\n} else if ([\"pagamento\", \"pagar\", \"pix\", \"cartao\", \"boleto\", \"parcelamento\", \"parcela\"].some(p =\u003e t.includes(p))) {\n  reply = \"Aceitamos pagamentos por cartao, Pix e Boleto, entretanto nao parcelamos o valor. A realizacao do pedido e pagamento e feita diretamente pelo site.\";\n} else if ([\"comprar\", \"compra\", \"quero comprar\", \"link\", \"site\", \"pedido\"].some(p =\u003e t.includes(p))) {\n  reply = \"A compra e feita diretamente pelo nosso site. Voce pode escolher os produtos e finalizar o pagamento por la: https://metasuplementosoficial.lojavirtualnuvem.com.br\";\n} else if ([\"whey\", \"creatina\", \"vitamina\", \"suplemento\", \"pre-treino\", \"hipercalorico\"].some(p =\u003e t.includes(p))) {\n  reply = \"Temos opcoes de whey, creatina, vitaminas e outros suplementos no site. Para ver disponibilidade e valores, consulte: https://metasuplementosoficial.lojavirtualnuvem.com.br\";\n} else if ([\"personal\", \"nutricionista\", \"nutri\", \"acompanhamento\", \"consultoria\"].some(p =\u003e t.includes(p))) {\n  reply = \"Para falar sobre acompanhamento com personal ou nutricionista, vou te direcionar para o WhatsApp: https://wa.me/55NUMERO\";\n}\n\nreturn [{ json: { ...$json, reply } }];"
+                                     },
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       96,
+                                       272
+                                   ],
+                      "id":  "9473fb00-8ff5-4107-b0de-8b2de34fafa6",
+                      "name":  "IG Classificador"
+                  },
+                  {
+                      "parameters":  {
+                                         "method":  "POST",
+                                         "url":  "=https://graph.facebook.com/v25.0/{{$env.IG_BUSINESS_ACCOUNT_ID}}/messages",
+                                         "sendHeaders":  true,
+                                         "headerParameters":  {
+                                                                  "parameters":  [
+                                                                                     {
+                                                                                         "name":  "Authorization",
+                                                                                         "value":  "=Bearer {{$env.META_PAGE_ACCESS_TOKEN}}"
+                                                                                     },
+                                                                                     {
+                                                                                         "name":  "Content-Type",
+                                                                                         "value":  "application/json"
+                                                                                     }
+                                                                                 ]
+                                                              },
+                                         "sendBody":  true,
+                                         "specifyBody":  "json",
+                                         "jsonBody":  "={\"recipient\":{\"id\":\"{{$json.sender_id}}\"},\"message\":{\"text\":\"{{$json.reply}}\"}}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "typeVersion":  4.2,
+                      "position":  [
+                                       320,
+                                       272
+                                   ],
+                      "id":  "b62b61e3-8f9c-4605-be92-a71ca1c63ffc",
+                      "name":  "IG Enviar Resposta"
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "json",
+                                         "responseBody":  "{\"ok\":true}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       544,
+                                       272
+                                   ],
+                      "id":  "9b1feab1-a90e-4e79-81fb-37a7e89ceb55",
+                      "name":  "IG ACK"
                   }
               ],
     "pinData":  {
@@ -366,6 +573,13 @@
                                                     [
                                                         {
                                                             "node":  "Entrega",
+                                                            "type":  "main",
+                                                            "index":  0
+                                                        }
+                                                    ],
+                                                    [
+                                                        {
+                                                            "node":  "Fora de SP",
                                                             "type":  "main",
                                                             "index":  0
                                                         }
@@ -435,14 +649,59 @@
                                                                                }
                                                                            ]
                                                                        ]
-                                                          }
+                                                          },
+                        "IG Webhook GET Verify":  {
+                                                      "main":  [
+                                                                   {
+                                                                       "node":  "IG Verify Response",
+                                                                       "type":  "main",
+                                                                       "index":  0
+                                                                   }
+                                                               ]
+                                                  },
+                        "IG Webhook POST":  {
+                                                "main":  [
+                                                             {
+                                                                 "node":  "IG Normalizador",
+                                                                 "type":  "main",
+                                                                 "index":  0
+                                                             }
+                                                         ]
+                                            },
+                        "IG Normalizador":  {
+                                                "main":  [
+                                                             {
+                                                                 "node":  "IG Classificador",
+                                                                 "type":  "main",
+                                                                 "index":  0
+                                                             }
+                                                         ]
+                                            },
+                        "IG Classificador":  {
+                                                 "main":  [
+                                                              {
+                                                                  "node":  "IG Enviar Resposta",
+                                                                  "type":  "main",
+                                                                  "index":  0
+                                                              }
+                                                          ]
+                                             },
+                        "IG Enviar Resposta":  {
+                                                   "main":  [
+                                                                {
+                                                                    "node":  "IG ACK",
+                                                                    "type":  "main",
+                                                                    "index":  0
+                                                                }
+                                                            ]
+                                               }
                     },
     "active":  false,
     "settings":  {
                      "executionOrder":  "v1",
                      "binaryMode":  "separate"
                  },
-    "versionId":  "780e8dff-43f0-4dad-95d9-8cb7f53e3f08",
+    "versionId":  "9b72a3f0-e93b-402e-822f-37347d616a77",
     "meta":  {
                  "instanceId":  "47deffbfbf9991f3445275ee59ea250d34a55f358dff5ea5873fc9a16284c084"
              },
