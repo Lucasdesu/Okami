@@ -3,8 +3,8 @@ type BotRule = {
   reply: string;
 };
 
-const STORE_URL = "https://metasuplementosoficial.lojavirtualnuvem.com.br";
-const WHATSAPP_URL = "https://wa.me/55NUMERO";
+const STORE_URL = "https://metasuplementos.store";
+const WHATSAPP_URL = "https://wa.me/5511965377603";
 
 const rules: BotRule[] = [
   {
@@ -13,10 +13,10 @@ const rules: BotRule[] = [
   },
   {
     keywords: ["entrega", "frete", "envio", "receber", "prazo", "sp", "sao paulo"],
-    reply: "Realizamos entregas para toda Sao Paulo. Para consultar valores, prazos e finalizar a compra, voce pode acessar nosso site."
+    reply: "Realizamos entregas para toda Sao Paulo. Para consultar valores, prazos e finalizar a compra, continue o processo de compra em nosso site."
   },
   {
-    keywords: ["erro", "falhou", "problema", "cobrou", "nao consegui pagar", "pagamento nao"],
+    keywords: ["erro", "falhou", "problema", "cobrou", "nao consegui pagar", "pagamento nao", "dificuldades"],
     reply: `Nesse caso, vou te direcionar para um atendente pelo WhatsApp para verificarem melhor: ${WHATSAPP_URL}`
   },
   {
