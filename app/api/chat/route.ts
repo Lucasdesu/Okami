@@ -1,4 +1,5 @@
 ﻿import { NextResponse } from "next/server";
+import { getBotReply } from "@/lib/botReplies";
 import { addMessage } from "@/lib/chatRepository";
 
 type ChatRequest = {
@@ -62,30 +63,10 @@ export async function POST(req: Request) {
     );
   }
 
-  const webhookUrl = process.env.N8N_WEBHOOK_URL;
-
-  if (!webhookUrl) {
-    return NextResponse.json({
-      reply: "Webhook do n8n nao configurado. Defina N8N_WEBHOOK_URL no ambiente."
-    });
-  }
-
   try {
     await addMessage(sessionId, source, "user", message);
 
-    const upstream = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        session_id: sessionId,
-        message,
-        source,
-        timestamp: new Date().toISOString()
-      })
-    });
-
-    const data = await upstream.json().catch(() => ({}));
-    const reply = typeof data?.reply === "string" ? data.reply : "Recebi sua mensagem. Um momento.";
+    const reply = getBotReply(message);
 
     await addMessage(sessionId, source, "bot", reply);
 
