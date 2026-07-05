@@ -8,6 +8,10 @@ const WHATSAPP_URL = "https://wa.me/5511965377603";
 
 const rules: BotRule[] = [
   {
+    keywords: ["atendimento", "contato", "humano"],
+    reply: `Caso voce precise entrar em contato conosco, mande mensagem para nosso atendente pelo WhatsApp para verificarem melhor: ${WHATSAPP_URL}`
+  },
+  {
     keywords: ["belem", "para", "fora de sp", "outro estado", "norte", "nordeste", "rio de janeiro", "minas gerais"],
     reply: `No momento, realizamos entregas apenas em Sao Paulo. Se quiser, posso te direcionar para um atendente no WhatsApp: ${WHATSAPP_URL}`
   },
